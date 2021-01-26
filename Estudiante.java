@@ -9,6 +9,7 @@ public class Estudiante {
     private String apellidos;
     private int faltasNoJustificadas;
     private int faltasJustificadas;
+    private tipoApercibimiento apercibimiento;
 
     /**
      *  
@@ -121,13 +122,16 @@ public class Estudiante {
         String apercibimientos = "";
         String nombreCompleto = apellidos + ", " + nombre;
         if (faltasNoJustificadas >= 10){
-            apercibimientos = "DIEZ";
+            apercibimientos = apercibimiento.DIEZ.toString();
         }
-        else if (faltasNoJustificadas >= 20){
-            apercibimientos = "DIEZ VEINTE";
+        if (faltasNoJustificadas >= 20){
+            apercibimientos = apercibimiento.DIEZ.toString() + " " +
+            apercibimiento.VEINTE.toString();
         }
-        else if (faltasNoJustificadas >= 30){
-            apercibimientos = "DIEZ VEINTE TREINTA";
+        if (faltasNoJustificadas >= 30){
+            apercibimientos = apercibimiento.DIEZ.toString() + " " + 
+            apercibimiento.VEINTE.toString() + " " +
+            apercibimiento.TREINTA.toString();
         }
         else{
             apercibimientos = "Sin apercibimientos";

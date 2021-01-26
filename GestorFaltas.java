@@ -89,7 +89,7 @@ public class GestorFaltas {
         StringBuilder sb = new StringBuilder();
         sb.append("Relación de estudiantes (" + total + ")\n\n");
         for(int i = 0; i < total; i++){
-            sb.append(estudiantes[i].toString() +"\n\n------------------\n");
+            sb.append(estudiantes[i].toString() +"------------------\n");
         }
         return sb.toString();
     }
@@ -105,8 +105,8 @@ public class GestorFaltas {
     public void justificarFaltas(String apellidos, int faltas) {
         int posicion = buscarEstudiante(apellidos);
         estudiantes[posicion].justificar(faltas);
-        System.out.println("Justificadas " + faltas + " faltas a "
-            + apellidos + ", " + estudiantes[posicion].getNombre());
+        System.out.println("Justificadas " + faltas + " faltas a " +
+        apellidos + ", " + estudiantes[posicion].getNombre());
     }
 
     /**
