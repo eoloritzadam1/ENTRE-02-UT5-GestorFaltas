@@ -11,10 +11,12 @@ import java.util.Scanner;
  * @author Elorri Oloritz
  */
 public class GestorFaltas {
-     
+    private Estudiante[] estudiantes;
+    private int total;
 
     public GestorFaltas(int n) {
-         
+        estudiantes = new Estudiante[n];
+        total = 0;
     }
 
     /**
@@ -22,7 +24,7 @@ public class GestorFaltas {
      * false en otro caso
      */
     public boolean cursoCompleto() {
-        return false;
+        return total == estudiantes.length;
     }
 
     /**
@@ -38,10 +40,11 @@ public class GestorFaltas {
      *    
      */
     public void addEstudiante(Estudiante nuevo) {
-        
+        if(!cursoCompleto()){
+
+        }
 
     }
-
 
     /**
      * buscar un estudiante por sus apellidos
@@ -52,8 +55,12 @@ public class GestorFaltas {
      *  
      */
     public int buscarEstudiante(String apellidos) {
-         
-        return 0;
+        for (int i = 0; i < total; i++){
+            if(estudiantes[i].getApellidos().equalsIgnoreCase(apellidos)){
+            }
+            return i;
+        }
+        return -1;
     }
 
     /**
@@ -62,7 +69,7 @@ public class GestorFaltas {
      *  
      */
     public String toString() {
-        
+
         return null;
 
     }
@@ -76,7 +83,6 @@ public class GestorFaltas {
      *  justificar también)
      */
     public void justificarFaltas(String apellidos, int faltas) {
-         
 
     }
 
@@ -86,7 +92,6 @@ public class GestorFaltas {
      * Método de selección directa
      */
     public void ordenar() {
-        
 
     }
 
@@ -95,7 +100,6 @@ public class GestorFaltas {
      * aquellos estudiantes con 30 o más faltas injustificadas
      */
     public void anularMatricula() {
-         
 
     }
 

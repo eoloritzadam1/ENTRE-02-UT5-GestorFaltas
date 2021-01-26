@@ -31,10 +31,14 @@ public class Estudiante {
      */
     private String crearNombre(String nombre)
     {
-        String[] nombres = nombre.split(" ");
+        String[] nombres = nombre.split("\\s+");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nombres.length; i++){
-            if (nombres[i] != " "){
+            if (i == nombres.length - 1){
+                sb.append(nombres[i].toUpperCase().charAt(0));
+                sb.append(nombres[i].substring(1));
+            }
+            else if (nombres[i] != " "){
                 sb.append(nombres[i].toUpperCase().charAt(0));
                 sb.append(". ");
             }
@@ -113,9 +117,27 @@ public class Estudiante {
      * (ver enunciado)
      */
     public String toString() {
-
-        return null;
-
+        String str = "";
+        String apercibimientos = "";
+        String nombreCompleto = apellidos + ", " + nombre;
+        if (faltasNoJustificadas >= 10){
+            apercibimientos = "DIEZ";
+        }
+        else if (faltasNoJustificadas >= 20){
+            apercibimientos = "DIEZ VEINTE";
+        }
+        else if (faltasNoJustificadas >= 30){
+            apercibimientos = "DIEZ VEINTE TREINTA";
+        }
+        else{
+            apercibimientos = "Sin apercibimientos";
+        }
+        str += String.format("%-25s%-35s\n","Apellidos y Nombre: ",nombreCompleto);
+        str += String.format("%-25s%-35d\n","Faltas No Justificadas: ",faltasNoJustificadas);
+        str += String.format("%-25s%-35d\n","Faltas Justificadas: ",faltasJustificadas);
+        str += String.format("%-25s%-35s\n","Apercibimientos: ",apercibimientos);
+        str += "\n";
+        return str;
     }
 
     public static void main(String[] args) {
