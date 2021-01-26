@@ -40,10 +40,27 @@ public class GestorFaltas {
      *    
      */
     public void addEstudiante(Estudiante nuevo) {
-        if(!cursoCompleto()){
-
+        if (total == 0){
+            estudiantes[0] = nuevo;
+            total++;
         }
-
+        else if(!cursoCompleto()){
+            if (buscarEstudiante(nuevo.getApellidos()) == -1) {
+                int i = total - 1;
+                while (i >= 0 && (estudiantes[i].getApellidos()).compareTo(nuevo.getApellidos()) > 0) {
+                    estudiantes[i + 1] = estudiantes[i];
+                    i--;
+                }
+                estudiantes[i + 1] = nuevo; // insertar el valor
+                total++; // incrementamos el nº de elementos en la lista
+            }
+            else{
+                System.out.println("El estudiante está en el curso");
+            }
+        }
+        else{
+            System.out.println("El curso está completo");
+        }
     }
 
     /**
@@ -57,8 +74,8 @@ public class GestorFaltas {
     public int buscarEstudiante(String apellidos) {
         for (int i = 0; i < total; i++){
             if(estudiantes[i].getApellidos().equalsIgnoreCase(apellidos)){
+                return i;
             }
-            return i;
         }
         return -1;
     }
@@ -69,9 +86,12 @@ public class GestorFaltas {
      *  
      */
     public String toString() {
-
-        return null;
-
+        StringBuilder sb = new StringBuilder();
+        sb.append("Relación de estudiantes (" + total + ")\n\n");
+        for(int i = 0; i < total; i++){
+            sb.append(estudiantes[i].toString() +"\n\n------------------\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -83,7 +103,10 @@ public class GestorFaltas {
      *  justificar también)
      */
     public void justificarFaltas(String apellidos, int faltas) {
-
+        int posicion = buscarEstudiante(apellidos);
+        estudiantes[posicion].justificar(faltas);
+        System.out.println("Justificadas " + faltas + " faltas a "
+            + apellidos + ", " + estudiantes[posicion].getNombre());
     }
 
     /**
@@ -92,7 +115,24 @@ public class GestorFaltas {
      * Método de selección directa
      */
     public void ordenar() {
-
+        for (int i = 0; i < total - 1; i++) {
+            int posmin = i;
+            for (int j = i + 1; j < total; j++) {
+                if (estudiantes[j].getFaltasNoJustificadas() >
+                estudiantes[posmin].getFaltasNoJustificadas()){
+                    posmin = j;
+                }
+                if(estudiantes[j].getFaltasNoJustificadas() ==
+                estudiantes[posmin].getFaltasNoJustificadas() &&
+                estudiantes[j].getFaltasJustificadas() >
+                estudiantes[posmin].getFaltasJustificadas()){
+                    posmin = j;
+                }
+            }
+            Estudiante aux = estudiantes[posmin];
+            estudiantes[posmin] = estudiantes[i];
+            estudiantes[i] = aux;
+        }
     }
 
     /**
@@ -100,7 +140,12 @@ public class GestorFaltas {
      * aquellos estudiantes con 30 o más faltas injustificadas
      */
     public void anularMatricula() {
-
+        for(int i = 0; i < total - 1; i++){
+            if (estudiantes[i].getFaltasNoJustificadas() >= 30){
+                estudiantes[i] = estudiantes[i + 1];
+            }
+        }
+        total--;
     }
 
     /**
