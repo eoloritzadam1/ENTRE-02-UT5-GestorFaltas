@@ -1,6 +1,7 @@
 /**
  * Un objeto de esta clase guarda la información de un estudiante
- *
+ * 
+ * @author Elorri Oloritz
  */
 public class Estudiante {
     private final static String SEPARADOR = ",";
@@ -17,10 +18,29 @@ public class Estudiante {
      *  
      */
     public Estudiante(String lineaDatos) {
-         
-
+        String[] datos = lineaDatos.split(SEPARADOR);
+        nombre = crearNombre(datos[0].trim());
+        apellidos = datos[1].trim().toUpperCase();
+        faltasNoJustificadas = Integer.parseInt(datos[2].trim());
+        faltasJustificadas = Integer.parseInt(datos[3].trim());
     }
 
+    /**
+     * 
+     * Compone el nombre
+     */
+    private String crearNombre(String nombre)
+    {
+        String[] nombres = nombre.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nombres.length; i++){
+            if (nombres[i] != " "){
+                sb.append(nombres[i].toUpperCase().charAt(0));
+                sb.append(". ");
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * accesor para el nombre completo
@@ -93,13 +113,12 @@ public class Estudiante {
      * (ver enunciado)
      */
     public String toString() {
-        
+
         return null;
 
     }
 
-
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Estudiante e1 = new Estudiante("  ander ibai  ,  Ruiz Sena , 12, 23");
         System.out.println(e1);
         System.out.println();
@@ -113,7 +132,6 @@ public class Estudiante {
         Estudiante e4 = new Estudiante("julen, Duque Puyal, 5, 55");
         System.out.println(e4);
         System.out.println();
-        
 
         System.out.println("---------------------------------");
         e1.justificar(3);

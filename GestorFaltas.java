@@ -8,6 +8,7 @@ import java.util.Scanner;
  * emitir listados con las faltas de los estudiantes, justificar faltas, 
  * anular matrícula dependiendo del nº de faltas, .....
  *
+ * @author Elorri Oloritz
  */
 public class GestorFaltas {
      
